@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+
 class UpgradetoPlus extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
@@ -20,7 +21,7 @@ class UpgradetoPlus extends StatelessWidget{
                 fontWeight: FontWeight.bold),
           ),
         ),
-        Spacer(),
+        const Spacer(),
         Container(
           width: 46,
           height: 20,

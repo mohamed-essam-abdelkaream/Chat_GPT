@@ -126,7 +126,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         child: TextButton(
                           onPressed: () {
                             if(isLast){
-                              navigateAndFinish(context,  MainDetails());
+                              navigateAndFinish(context,  MainDetails(null));
                             } else{
                               boardController.nextPage(duration: Duration(microseconds: 750),
                                   curve: Curves.ease);

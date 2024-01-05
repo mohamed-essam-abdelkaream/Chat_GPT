@@ -1,36 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:teqnia/modules/ask_chat_gpt/ask_chat_gpt.dart';
-import 'package:teqnia/modules/details_screen/settings/clear_conversation.dart';
 import 'package:teqnia/modules/details_screen/settings/light_mode.dart';
 import 'package:teqnia/modules/details_screen/settings/logout.dart';
 import 'package:teqnia/modules/details_screen/settings/updates_faq.dart';
 import 'package:teqnia/modules/details_screen/settings/upgrade_to_plus.dart';
 
 class MainDetails extends StatefulWidget {
+   String? history;
+  MainDetails(this.history);
 
   @override
   State<MainDetails> createState() => _MainDetailsState();
 }
-
 class _MainDetailsState extends State<MainDetails> {
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: const Color(0xff202123),
+        backgroundColor: Color(0xff202123),
         body: Padding(
-          padding: const EdgeInsets.all(15.0),
+          padding: EdgeInsets.all(15.0),
           child: Column(
             children: [
               Row(
                 children: [
-                  const Image(
+                  Image(
                     image: AssetImage('assets/images/new_chat.png'),
                     width: 15,
                     height: 15,
                   ),
-                  const Padding(
+                  Padding(
                     padding: EdgeInsets.all(15.0),
                     child: Text(
                       'New chat',
@@ -41,10 +40,11 @@ class _MainDetailsState extends State<MainDetails> {
                       ),
                     ),
                   ),
-                  const Spacer(),
+                  Spacer(),
                   IconButton(
-                    icon: const Icon(Icons.arrow_forward_ios, size: 15,),
+                    icon: Icon(Icons.arrow_forward_ios, size: 15,),
                     onPressed: () async {
+
                       Navigator.push(context,MaterialPageRoute(builder: (context) => AskChatGpt())
                       );
                     },
@@ -54,17 +54,64 @@ class _MainDetailsState extends State<MainDetails> {
               Container(
                 width: double.infinity,
                 height: 1,
-                decoration: const BoxDecoration(color: Colors.grey),
+                decoration: BoxDecoration(color: Colors.grey),
               ),
-              const Spacer(),
+              SizedBox(height: 10,),
+              Column(
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius:BorderRadius.circular(5),
+                      color: Color(0xff202123)
+                    ),
+                    child:  Column(
+                    children: [
+                      if(widget.history != null) Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            color:Color(0xff202123)
+                          ),
+                          child: Text('${widget.history}'),
+                        )
+                      )
+                    ],
+                  ),),
+                  SizedBox(height: 10),
+                  Container(
+                    width: double.infinity,
+                    height: 1,
+                    decoration: BoxDecoration(color: Colors.grey),
+                  ),
+                  //if(widget.history != null) Text('${widget.history}')
+                ],
+              ),
+              Spacer(),
               Container(
                 width: double.infinity,
                 height: 1,
-                decoration: const BoxDecoration(color: Colors.grey),
+                decoration: BoxDecoration(color: Colors.grey),
               ),
               Column(
                 children: [
-                  ClearConversation(),
+                  Row(
+                    children: [
+                      const Image(
+                        image: AssetImage('assets/images/clear.png'),
+                        width: 20,
+                        height: 20,
+                      ),
+                      TextButton(onPressed: (){
+                        setState(() {
+                          widget.history = '';
+                        });
+                      }, child: const Text('Clear conversation',style: TextStyle(
+                          fontSize: 16,
+                          fontFamily: 'Raleway',
+                          fontWeight: FontWeight.bold,color: Colors.white),)),
+                    ],
+                  ),
                   UpgradetoPlus(),
                   LightMode(),
                   Updates(),
@@ -77,5 +124,4 @@ class _MainDetailsState extends State<MainDetails> {
       ),
     );
   }
-
 }

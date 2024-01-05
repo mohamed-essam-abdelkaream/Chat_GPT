@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:teqnia/modules/details_screen/main_details.dart';
+
 import '../../constants/strings.dart';
 
 class AskChatGpt extends StatefulWidget {
@@ -37,7 +38,9 @@ class _ChatGPTScreenState extends State<AskChatGpt> {
 
     Map<String, dynamic> body = {
       "model": "gpt-3.5-turbo",
-      "messages": [{"role": "user", "content": message}],
+      "messages": [
+        {"role": "user", "content": message}
+      ],
       "max_tokens": 500,
     };
 
@@ -61,15 +64,15 @@ class _ChatGPTScreenState extends State<AskChatGpt> {
 
   Widget _buildMessage(Message message) {
     return Container(
-      margin: const EdgeInsets.symmetric(vertical: 10.0),
+      margin: EdgeInsets.symmetric(vertical: 10.0),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Text(
               message.isMe ? 'You' : 'GPT',
-              style: const TextStyle(fontWeight: FontWeight.bold),
+              style: TextStyle(fontWeight: FontWeight.bold),
             ),
             Text(message.text),
           ],
@@ -82,19 +85,23 @@ class _ChatGPTScreenState extends State<AskChatGpt> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: const Color(0xff343541),
+        backgroundColor: Color(0xff343541),
         body: Column(
           children: <Widget>[
             Padding(
-              padding: const EdgeInsets.only(top: 15.0, left: 10, right: 15),
+              padding: EdgeInsets.only(top: 15.0, left: 10, right: 15),
               child: Row(
                 children: [
                   IconButton(
-                    icon: const Icon(Icons.arrow_back_ios_new_outlined, size: 15),
-                    onPressed: () {
-                      Navigator.pop(context,MainDetails()); //Return messages to previous screen
-                    },
-                  ),
+                      icon: Icon(Icons.arrow_back_ios_new_outlined, size: 15),
+                      onPressed: () {
+                        Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                                builder: (c) =>
+                                    MainDetails(_messages.isNotEmpty?_messages.first.text:null)),
+                            (route) => false);
+                      }),
                   const Text(
                     'Back',
                     style: TextStyle(
@@ -102,7 +109,7 @@ class _ChatGPTScreenState extends State<AskChatGpt> {
                         fontFamily: 'Raleway',
                         fontWeight: FontWeight.bold),
                   ),
-                  const Spacer(),
+                  Spacer(),
                   const Image(
                     image: AssetImage('assets/images/Vector.png'),
                     width: 20,
@@ -114,7 +121,7 @@ class _ChatGPTScreenState extends State<AskChatGpt> {
             Container(
               width: double.infinity,
               height: 1,
-              decoration: const BoxDecoration(color: Colors.grey),
+              decoration: BoxDecoration(color: Colors.grey),
             ),
             Expanded(
               child: ListView.builder(
@@ -136,29 +143,28 @@ class _ChatGPTScreenState extends State<AskChatGpt> {
                         decoration: InputDecoration(
                           suffixIcon: _isLoading
                               ? Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: List.generate(
-                              3,
-                                  (index) => Padding(
-                                padding: const EdgeInsets.all(2.0),
-                                child: Container(
-                                  width: 8,
-                                  height: 8,
-                                  decoration: const BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: Colors.white,
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: List.generate(
+                                    3,
+                                    (index) => Padding(
+                                      padding: const EdgeInsets.all(2.0),
+                                      child: Container(
+                                        width: 8,
+                                        height: 8,
+                                        decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                )
+                              : GestureDetector(
+                                  onTap: onSendMessage,
+                                  child: Image(
+                                    image: AssetImage('assets/images/send.png'),
                                   ),
                                 ),
-                              ),
-                            ),
-                          )
-                              : GestureDetector(
-                            onTap: onSendMessage,
-                            child: const Image(
-                              image:
-                              AssetImage('assets/images/send.png'),
-                            ),
-                          ),
                           contentPadding: EdgeInsets.all(10.0),
                           hintText: 'Type a message...',
                           border: OutlineInputBorder(
