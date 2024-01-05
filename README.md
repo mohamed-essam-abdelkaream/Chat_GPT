@@ -1,16 +1,8 @@
-# teqnia
+# TQnia
 
 A new Flutter project.
 
-## Getting Started
+## ☑️Chat GPT clone
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<img width="738" alt="16" src="https://github.com/mohamed-essam-abdelkaream/Chat_GPT/assets/75342235/214b8d10-5443-4224-824c-aef6a9f04e44">
+<img width="1081" alt="k;h" src="https://github.com/mohamed-essam-abdelkaream/Chat_GPT/assets/75342235/2ed3bfd0-a57f-4b56-8b5e-026d38fd4584">
