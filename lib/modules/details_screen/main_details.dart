@@ -59,11 +59,7 @@ class _MainDetailsState extends State<MainDetails> {
                   ),
                 ],
               ),
-              Container(
-                width: double.infinity,
-                height: 1,
-                decoration: BoxDecoration(color: Colors.grey),
-              ),
+              Divider(height: 1,color:Colors.grey),
               SizedBox(
                 height: 10,
               ),
@@ -94,12 +90,7 @@ class _MainDetailsState extends State<MainDetails> {
                                         fontWeight: FontWeight.bold),
                                   ),
                                   SizedBox(height: 10),
-                                  Container(
-                                    width: double.infinity,
-                                    height: 1,
-                                    decoration:
-                                        BoxDecoration(color: Colors.grey),
-                                  ),
+                                  Divider(height: 1,color:Colors.grey),
                                 ],
                               ),
                             ),
@@ -110,11 +101,7 @@ class _MainDetailsState extends State<MainDetails> {
                 ],
               ),
               Spacer(),
-              Container(
-                width: double.infinity,
-                height: 1,
-                decoration: BoxDecoration(color: Colors.grey),
-              ),
+              Divider(height: 1,color:Colors.grey),
               Column(
                 children: [
                   Row(

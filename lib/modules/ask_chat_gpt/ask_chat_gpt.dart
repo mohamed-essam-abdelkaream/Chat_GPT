@@ -89,11 +89,7 @@ class _ChatGPTScreenState extends State<AskChatGpt> {
         body: Column(
           children: <Widget>[
             _buildAppBar(),
-            Container(
-              width: double.infinity,
-              height: 1,
-              decoration: BoxDecoration(color: Colors.grey),
-            ),
+            Divider(height: 1,color:Colors.grey),
             Expanded(
               child: ListView.builder(
                 reverse: true,
