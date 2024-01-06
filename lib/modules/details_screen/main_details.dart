@@ -6,12 +6,14 @@ import 'package:teqnia/modules/details_screen/settings/updates_faq.dart';
 import 'package:teqnia/modules/details_screen/settings/upgrade_to_plus.dart';
 
 class MainDetails extends StatefulWidget {
-   String? history;
+  String? history;
+
   MainDetails(this.history);
 
   @override
   State<MainDetails> createState() => _MainDetailsState();
 }
+
 class _MainDetailsState extends State<MainDetails> {
   @override
   Widget build(BuildContext context) {
@@ -42,10 +44,16 @@ class _MainDetailsState extends State<MainDetails> {
                   ),
                   Spacer(),
                   IconButton(
-                    icon: Icon(Icons.arrow_forward_ios, size: 15,),
+                    icon: Icon(
+                      Icons.arrow_forward_ios,
+                      size: 15,
+                    ),
                     onPressed: () async {
-
-                      Navigator.push(context,MaterialPageRoute(builder: (context) => AskChatGpt())
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => AskChatGpt(),
+                        ),
                       );
                     },
                   ),
@@ -56,35 +64,49 @@ class _MainDetailsState extends State<MainDetails> {
                 height: 1,
                 decoration: BoxDecoration(color: Colors.grey),
               ),
-              SizedBox(height: 10,),
+              SizedBox(
+                height: 10,
+              ),
               Column(
                 children: [
                   Container(
                     decoration: BoxDecoration(
-                      borderRadius:BorderRadius.circular(5),
-                      color: Color(0xff202123)
+                      borderRadius: BorderRadius.circular(5),
+                      color: Color(0xff202123),
                     ),
-                    child:  Column(
-                    children: [
-                      if(widget.history != null) Padding(
-                        padding: const EdgeInsets.all(12.0),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            color:Color(0xff202123)
+                    child: Column(
+                      children: [
+                        if (widget.history != null)
+                          Padding(
+                            padding: const EdgeInsets.all(12.0),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(5),
+                                color: Color(0xff202123),
+                              ),
+                              child: Column(
+                                children: [
+                                  Text(
+                                    '${widget.history}',
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        fontFamily: 'Raleway',
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  SizedBox(height: 10),
+                                  Container(
+                                    width: double.infinity,
+                                    height: 1,
+                                    decoration:
+                                        BoxDecoration(color: Colors.grey),
+                                  ),
+                                ],
+                              ),
+                            ),
                           ),
-                          child: Text('${widget.history}'),
-                        )
-                      )
-                    ],
-                  ),),
-                  SizedBox(height: 10),
-                  Container(
-                    width: double.infinity,
-                    height: 1,
-                    decoration: BoxDecoration(color: Colors.grey),
+                      ],
+                    ),
                   ),
-                  //if(widget.history != null) Text('${widget.history}')
                 ],
               ),
               Spacer(),
@@ -102,14 +124,23 @@ class _MainDetailsState extends State<MainDetails> {
                         width: 20,
                         height: 20,
                       ),
-                      TextButton(onPressed: (){
-                        setState(() {
-                          widget.history = '';
-                        });
-                      }, child: const Text('Clear conversation',style: TextStyle(
-                          fontSize: 16,
-                          fontFamily: 'Raleway',
-                          fontWeight: FontWeight.bold,color: Colors.white),)),
+                      TextButton(
+                        onPressed: () {
+                          setState(
+                            () {
+                              widget.history = '';
+                            },
+                          );
+                        },
+                        child: const Text(
+                          'Clear conversation',
+                          style: TextStyle(
+                              fontSize: 16,
+                              fontFamily: 'Raleway',
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white),
+                        ),
+                      ),
                     ],
                   ),
                   UpgradetoPlus(),

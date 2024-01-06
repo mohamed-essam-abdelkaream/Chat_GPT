@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'modules/onboarding/onboarding.dart';
 void main() {
   runApp(MyApp());

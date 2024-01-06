@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-
-class UpgradetoPlus extends StatelessWidget{
+class UpgradetoPlus extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -26,16 +25,15 @@ class UpgradetoPlus extends StatelessWidget{
           width: 46,
           height: 20,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8),
-            color: Color(0xffFBF3AD)
-          ),
+              borderRadius: BorderRadius.circular(8), color: Color(0xffFBF3AD)),
           child: const Center(
             child: Text(
               'NEW',
               style: TextStyle(
                   fontSize: 13,
                   fontFamily: 'Raleway',
-                  fontWeight: FontWeight.bold,color: Colors.black),
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black),
             ),
           ),
         )

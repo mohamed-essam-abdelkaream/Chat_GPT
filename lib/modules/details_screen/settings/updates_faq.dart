@@ -19,7 +19,7 @@ class Updates extends StatelessWidget {
           child: const Text(
             'Updates & FAQ',
             style: TextStyle(
-              color: Colors.white,
+                color: Colors.white,
                 fontSize: 16,
                 fontFamily: 'Raleway',
                 fontWeight: FontWeight.bold),

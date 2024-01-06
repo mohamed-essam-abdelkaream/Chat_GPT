@@ -55,9 +55,9 @@ class _ChatGPTScreenState extends State<AskChatGpt> {
 
     print(response.body);
 
-    Map<String, dynamic> parsedReponse = json.decode(response.body);
+    Map<String, dynamic> parsedResponse = json.decode(response.body);
 
-    String reply = parsedReponse['choices'][0]['message']['content'];
+    String reply = parsedResponse['choices'][0]['message']['content'];
 
     return reply;
   }
@@ -88,36 +88,7 @@ class _ChatGPTScreenState extends State<AskChatGpt> {
         backgroundColor: Color(0xff343541),
         body: Column(
           children: <Widget>[
-            Padding(
-              padding: EdgeInsets.only(top: 15.0, left: 10, right: 15),
-              child: Row(
-                children: [
-                  IconButton(
-                      icon: Icon(Icons.arrow_back_ios_new_outlined, size: 15),
-                      onPressed: () {
-                        Navigator.pushAndRemoveUntil(
-                            context,
-                            MaterialPageRoute(
-                                builder: (c) =>
-                                    MainDetails(_messages.isNotEmpty?_messages.first.text:null)),
-                            (route) => false);
-                      }),
-                  const Text(
-                    'Back',
-                    style: TextStyle(
-                        fontSize: 16,
-                        fontFamily: 'Raleway',
-                        fontWeight: FontWeight.bold),
-                  ),
-                  Spacer(),
-                  const Image(
-                    image: AssetImage('assets/images/Vector.png'),
-                    width: 20,
-                    height: 20,
-                  ),
-                ],
-              ),
-            ),
+            _buildAppBar(),
             Container(
               width: double.infinity,
               height: 1,
@@ -132,51 +103,98 @@ class _ChatGPTScreenState extends State<AskChatGpt> {
                 },
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(right: 12.0, left: 12, bottom: 20),
-              child: Container(
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: TextField(
-                        controller: _textEditingController,
-                        decoration: InputDecoration(
-                          suffixIcon: _isLoading
-                              ? Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: List.generate(
-                                    3,
-                                    (index) => Padding(
-                                      padding: const EdgeInsets.all(2.0),
-                                      child: Container(
-                                        width: 8,
-                                        height: 8,
-                                        decoration: BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                )
-                              : GestureDetector(
-                                  onTap: onSendMessage,
-                                  child: Image(
-                                    image: AssetImage('assets/images/send.png'),
-                                  ),
-                                ),
-                          contentPadding: EdgeInsets.all(10.0),
-                          hintText: 'Type a message...',
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(5)),
-                        ),
-                      ),
+            _buildMessageInput(),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildAppBar() {
+    return Padding(
+      padding: EdgeInsets.only(top: 15.0, left: 10, right: 15),
+      child: Row(
+        children: [
+          IconButton(
+            icon: Icon(Icons.arrow_back_ios_new_outlined, size: 15),
+            onPressed: () {
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(
+                  builder: (c) => MainDetails(
+                    _messages.isNotEmpty ? _messages.first.text : null,
+                  ),
+                ),
+                    (route) => false,
+              );
+            },
+          ),
+          const Text(
+            'Back',
+            style: TextStyle(
+              fontSize: 16,
+              fontFamily: 'Raleway',
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Spacer(),
+          const Image(
+            image: AssetImage('assets/images/Vector.png'),
+            width: 20,
+            height: 20,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildMessageInput() {
+    return Padding(
+      padding: const EdgeInsets.only(right: 12.0, left: 12, bottom: 20),
+      child: Container(
+        child: Row(
+          children: [
+            Expanded(
+              child: TextField(
+                controller: _textEditingController,
+                decoration: InputDecoration(
+                  suffixIcon: _isLoading
+                      ? _buildLoadingIndicator()
+                      : GestureDetector(
+                    onTap: onSendMessage,
+                    child: Image(
+                      image: AssetImage('assets/images/send.png'),
                     ),
-                  ],
+                  ),
+                  contentPadding: EdgeInsets.all(10.0),
+                  hintText: 'Type a message...',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(5),
+                  ),
                 ),
               ),
-            )
+            ),
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildLoadingIndicator() {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: List.generate(
+        3,
+            (index) => Padding(
+          padding: const EdgeInsets.all(2.0),
+          child: Container(
+            width: 8,
+            height: 8,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: Colors.white,
+            ),
+          ),
         ),
       ),
     );
